@@ -10,6 +10,10 @@ int LED_barrera = 10;
 
 int tiempo = 0;
 
+byte ser_enviar[] = {0, 0, 0};
+const size_t ser_enviar_Length = sizeof(ser_enviar) / sizeof(ser_enviar[0]);
+
+
 void setup() {
     pinMode(sen_masa, INPUT);
     pinMode(boton, INPUT);
@@ -51,15 +55,11 @@ void Leer_Valores(int *lec_masa, int *lec_boton, int *lec_contador, int *lec_ret
 
 void Enviar_Serial(int ser_masa, int ser_boton, int ser_contador, int ser_retro_arriba, int ser_retro_abajo){
 
-  Serial.print(ser_masa);
-  Serial.print("M, ");
-  Serial.print(ser_boton);
-  Serial.print("B, ");
-  Serial.print(ser_contador);
-  Serial.print("R, ");
-  Serial.print(ser_retro_arriba);
-  Serial.print(", ");
-  Serial.println(ser_retro_abajo);
+    ser_enviar[0] = ser_masa;
+    ser_enviar[1] = ser_boton;
+    ser_enviar[2] = ser_contador;
+
+    Serial.write(ser_enviar, ser_enviar_Length);
   
 }
 
